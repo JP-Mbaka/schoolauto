@@ -22,12 +22,12 @@ function Auth() {
   const onSubmit = (values: z.infer<typeof authType>) => {};
 
   return (
-    <section className="flex flex-col items-center justify-center h-full m-auto w-">
-      <h1 className="text-black text-4xl font-bold tracking-tighter font-[family-name:var(--font-geist-sans)]">
+    <section className="flex flex-col items-center justify-center h-full m-auto max-md:h-[80%] max-md:w-[80%] max-md:bg-amber-100 max-md:opacity-85 max-md:rounded-2xl">
+      <h1 className="text-black text-4xl max-md:text-2xl font-bold tracking-tighter font-[family-name:var(--font-geist-sans)]">
         Welcome Back!
       </h1>
       <p className="tracking-widest my-2">Enter your email and password</p>
-      <section className=" w-[50%] ">
+      <section className=" w-[50%] max-md:w-full max-md:px-2">
         <Form {...formBase}>
           <form onSubmit={formBase.handleSubmit(onSubmit)}>
             <CustomInput
@@ -61,7 +61,7 @@ function Auth() {
           <span>Sign In with Google</span>
         </div>
         <h1 className="my-1.5 text-center">
-          Don&apos;t an account yet?{" "}
+          Don&apos;t have an account yet?{" "}
           <span className="text-amber-400 font-semibold">Sign Up</span>
         </h1>
       </section>
