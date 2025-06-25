@@ -45,7 +45,7 @@ function Auth() {
             <div className="flex justify-end">
               <p>forgot password?</p>
             </div>
-            <Button className="w-full mt-10 p-5 bg-amber-400 text-amber-50">
+            <Button className="w-full mt-10 p-5 bg-blue-600 text-amber-50">
               Sign In
             </Button>
           </form>
@@ -62,7 +62,7 @@ function Auth() {
         </div>
         <h1 className="my-1.5 text-center">
           Don&apos;t have an account yet?{" "}
-          <span className="text-amber-400 font-semibold">Sign Up</span>
+          <span className="text-blue-600 font-semibold">Sign Up</span>
         </h1>
       </section>
     </section>
