@@ -8,7 +8,7 @@ export default function RootLayout({
     <section className="h-svh w-full max-md:h-screen max-md:w-auto p-4 max-md:p-0 min-md:flex max-md:relative">
       {/* Left Section with Background Image */}
       <section
-        className="w-[50%] h-full bg-[url('/auth.jpeg')] bg-cover bg-center min-md:rounded-2xl shadow-2xl
+        className="w-[50%] h-full bg-[url('/auth.jpg')] bg-cover bg-center min-md:rounded-2xl shadow-2xl
         min-md:flex min-md:flex-col min-md:justify-between 
         max-md:w-full max-md:absolute max-md:z-10"
       >

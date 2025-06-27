@@ -19,7 +19,9 @@ function Auth() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof authType>) => {};
+  const onSubmit = (values: z.infer<typeof authType>) => {
+    console.log(values);
+  };
 
   return (
     <section className="flex flex-col items-center justify-center h-full m-auto max-md:h-[80%] max-md:w-[80%] max-md:bg-amber-100 max-md:opacity-85 max-md:rounded-2xl">
