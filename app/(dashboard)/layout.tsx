@@ -5,59 +5,66 @@ import Link from "next/link";
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <section className="w-full flex h-screen">
-      <div className="not-printable print:hidden flex-1 flex flex-col max-sm:hidden">
-        {/* Logo and Title */}
-        <div className="w-full flex items-center space-x-2 py-3.5 justify-center bg-blue-600">
-          <Image src="/logo.jpg" alt="School logo" width={45} height={50} />
-          <p>Auto Primary School</p>
-        </div>
-        <div className="flex-3/5 pt-12 ">
-          {[
-            { label: "Records", link: "/records" },
-            { label: "Payment", link: "/payments" },
-            { label: "Users", link: "/users" },
-            { label: "Subjects", link: "/courses" },
+  const navItems = [
+    { label: "Records", link: "/records" },
+    { label: "Payment", link: "/payments" },
+    { label: "Users", link: "/users" },
+    { label: "Subjects", link: "/courses" },
+    { label: "Lessons", link: "/lessons" },
+  ];
 
-            { label: "Lessons", link: "/lessons" },
-          ].map((e0, k) => (
-            <Link key={k} href={e0["link"]}>
+  return (
+    <section className="flex w-full h-screen overflow-hidden">
+      {/* Sidebar */}
+      <aside className="not-printable print:hidden w-64 max-sm:hidden bg-white shadow-md flex flex-col">
+        {/* Logo */}
+        <div className="flex items-center justify-center gap-2 bg-blue-600 py-4 text-white text-lg font-semibold">
+          <Image src="/logo.jpg" alt="School logo" width={40} height={40} />
+          <span>Auto Primary School</span>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 py-8">
+          {navItems.map((item, index) => (
+            <Link key={item.link} href={item.link}>
               <div
                 className={`${
-                  k === 0
-                    ? "border-y-2 border-y-blue-600"
-                    : "border-b-2 border-b-blue-600"
-                }  text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4`}
+                  index === 0 ? "border-y-2" : "border-b-2"
+                } border-blue-600 px-6 py-3 text-blue-600 hover:bg-blue-600 hover:text-white cursor-pointer transition-all`}
               >
-                {e0["label"]}
+                {item.label}
               </div>
             </Link>
           ))}
-        </div>
-        <div className="flex-1/5 flex flex-col justify-end">
-          <div className="bg-blue-600 text-white hover:bg-white hover:text-blue-600 hover:cursor-pointer px-12 py-4">
+        </nav>
+
+        {/* Footer button */}
+        <div className="p-6">
+          <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-white hover:text-blue-600 border border-blue-600 transition-all">
             Invite +
-          </div>
+          </button>
         </div>
-      </div>
-      <div className="flex-6 border border-r-2  flex flex-col ">
-        {" "}
-        {/* Logo and Title */}
-        <div className="hidden w-full max-sm:flex items-center space-x-2 py-3.5 justify-center bg-blue-600">
-          <Image src="/logo.jpg" alt="School logo" width={45} height={50} />
-          <p>Auto Primary School</p>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex flex-col flex-1 overflow-auto border-l">
+        {/* Mobile logo */}
+        <div className="sm:hidden flex items-center justify-center gap-2 bg-blue-600 py-3 text-white font-semibold">
+          <Image src="/logo.jpg" alt="School logo" width={40} height={40} />
+          <span>Auto Primary School</span>
         </div>
-        <div className="not-printable print:hidden bg-blue-600 text-white flex-1 flex items-center justify-between px-12">
-          <h1>
-            {
-              '"Live as if you were to die tomorrow. Learn as if you were to live forever"'
-            }
+
+        {/* Header */}
+        <div className="not-printable print:hidden bg-blue-600 text-white px-6 py-4 flex items-center justify-between">
+          <h1 className="text-sm italic">
+            {`Live as if you were to die tomorrow. Learn as if you were to live forever.`}
           </h1>
-          <div className="max-sm:hidden">Odunayo</div>
+          <span className="hidden sm:block font-medium">Odunayo</span>
         </div>
-        <div className=" flex-12">{children}</div>
-      </div>
+
+        {/* Children Content */}
+        <div className="flex-1 overflow-y-auto p-6">{children}</div>
+      </main>
     </section>
   );
 }

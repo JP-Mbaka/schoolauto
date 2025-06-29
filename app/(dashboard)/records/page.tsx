@@ -5,6 +5,8 @@ import Header from "@/components/header_component";
 import TableComponent from "@/components/table_component";
 import React, { useEffect, useState } from "react";
 import ResultCard from "../../../components/result_card";
+import { sampleData } from "@/helper/data";
+import { exportToExcel } from "@/helper/other";
 
 function Amin() {
   const [userRole, setUserRole] = useState("");
@@ -18,6 +20,7 @@ function Amin() {
     window.print(); // Will only print what's visible in print media
   };
 
+  const columnsKey = sampleData.length > 0 ? Object.keys(sampleData[0]) : [];
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
       <Header userRole={userRole} title="Records" action="Create" />
@@ -36,21 +39,22 @@ function Amin() {
                 </p> */}
 
             <div className="flex space-x-2">
-              <div onClick={handlePrint} className="px-4 py-2 bg-green-400">
+              <div
+                onClick={handlePrint}
+                className="cursor-pointer px-4 py-2 bg-green-400"
+              >
                 Print
               </div>
-              <div className="px-4 py-2 bg-blue-300">Export</div>
+              <div
+                onClick={() => exportToExcel(sampleData, "student-results")}
+                className="cursor-pointer px-4 py-2 bg-blue-300"
+              >
+                Export
+              </div>
             </div>
           </div>
           <div>
-            <TableComponent
-              columns={["Name", "Age", "Email"]}
-              data={[
-                { Name: "Alice", Age: 24, Email: "alice@example.com" },
-                { Name: "Bob", Age: 30, Email: "bob@example.com" },
-                { Name: "Charlie", Age: 22, Email: "charlie@example.com" },
-              ]}
-            />
+            <TableComponent columns={columnsKey} data={sampleData} />
           </div>
         </div>
       </div>
