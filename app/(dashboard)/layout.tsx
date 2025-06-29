@@ -35,14 +35,14 @@ export default function RootLayout({
           </div>
         </div>
       </div>
-      <div className="flex-6 bg-yellow-400  flex flex-col ">
+      <div className="flex-6 border border-r-2  flex flex-col ">
         {" "}
         {/* Logo and Title */}
         <div className="hidden w-full max-sm:flex items-center space-x-2 py-3.5 justify-center bg-blue-600">
           <Image src="/logo.jpg" alt="School logo" width={45} height={50} />
           <p>Auto Primary School</p>
         </div>
-        <div className="bg-red-400 flex-1 flex items-center justify-between px-12">
+        <div className="bg-blue-600 text-white flex-1 flex items-center justify-between px-12">
           <h1>
             {
               '"Live as if you were to die tomorrow. Learn as if you were to live forever"'
@@ -50,7 +50,7 @@ export default function RootLayout({
           </h1>
           <div className="max-sm:hidden">Odunayo</div>
         </div>
-        <div className="bg-green-500 flex-12">{children}</div>
+        <div className=" flex-12">{children}</div>
       </div>
     </section>
   );
