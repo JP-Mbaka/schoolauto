@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -13,21 +14,26 @@ export default function RootLayout({
           <p>Auto Primary School</p>
         </div>
         <div className="flex-3/5 pt-12 ">
-          <div className="border-y-2 border-y-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4">
-            Records
-          </div>
-          <div className="border-b-2 border-b-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4">
-            Payment
-          </div>
-          <div className="border-b-2 border-b-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4">
-            Users
-          </div>
-          <div className="border-b-2 border-b-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4">
-            Courses
-          </div>
-          <div className="border-b-2 border-b-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4">
-            Lessons
-          </div>
+          {[
+            { label: "Records", link: "/records" },
+            { label: "Payment", link: "/payments" },
+            { label: "Users", link: "/users" },
+            { label: "Courses", link: "#" },
+            // /courses
+            { label: "Lessons", link: "#" }, ///lessons
+          ].map((e0, k) => (
+            <Link key={k} href={e0["link"]}>
+              <div
+                className={`${
+                  k === 0
+                    ? "border-y-2 border-y-blue-600"
+                    : "border-b-2 border-b-blue-600"
+                }  text-blue-600 hover:bg-blue-600 hover:text-white hover:cursor-pointer px-12 py-4`}
+              >
+                {e0["label"]}
+              </div>
+            </Link>
+          ))}
         </div>
         <div className="flex-1/5 flex flex-col justify-end">
           <div className="bg-blue-600 text-white hover:bg-white hover:text-blue-600 hover:cursor-pointer px-12 py-4">

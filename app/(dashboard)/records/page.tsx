@@ -1,20 +1,34 @@
 "use client";
+import Dropdown from "@/components/custom_dropdown";
 import StatusFooter from "@/components/footer_component";
 import Header from "@/components/header_component";
 import TableComponent from "@/components/table_component";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Amin() {
+  const [userRole, setUserRole] = useState("");
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setUserRole("teacher");
+  }, []);
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
-      <Header />
+      <Header userRole={userRole} title="Records" />
       <div className="flex-1 bg-slate-100 px-12 py-6">
         <div className="bg-white h-auto w-auto rounded-sm px-4 py-6">
           <div className="flex justify-between items-center mb-2">
-            <div>
-              <h1>Select Class Name</h1>
-              {/* //Drop Down List */}
-            </div>
+            <Dropdown
+              label="Select Class"
+              options={["Primary 1", "Primary 2", "Primary 3"]}
+              value={selected}
+              onChange={setSelected}
+            />
+
+            {/* <p className="mt-4 text-sm text-gray-600">
+                  Selected: {selected}
+                </p> */}
+
             <div className="flex space-x-2">
               <div className="px-4 py-2 bg-green-400">Print</div>
               <div className="px-4 py-2 bg-blue-300">Export</div>
@@ -34,17 +48,19 @@ function Amin() {
         <div></div>
       </div>
       {/* <Footer /> */}
-      <StatusFooter
-        session="2024/2025"
-        term="Second"
-        year="JSS 2"
-        classAverage={72.5}
-        averageStudents={15}
-        totalStudents={30}
-        noCA={2}
-        noExam={1}
-        failedStudents={3}
-      />
+      {userRole == "teacher" && (
+        <StatusFooter
+          session="2024/2025"
+          term="Second"
+          year="JSS 2"
+          classAverage={72.5}
+          averageStudents={15}
+          totalStudents={30}
+          noCA={2}
+          noExam={1}
+          failedStudents={3}
+        />
+      )}
     </div>
   );
 }
