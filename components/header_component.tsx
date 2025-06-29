@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
   return (
-    <div className="bg-white py-4 px-12 flex justify-between items-center">
+    <div className="not-printable print:hidden bg-white py-4 px-12 flex justify-between items-center">
       <div>
         <h1 className="text-2xl font-semibold">
           {title == "records"
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
             : title}
         </h1>
       </div>
-      <div className="bg-blue-600 px-4 py-2 text-white hover:bg-amber-300 hover:text-black rounded-sm cursor-pointer transition-colors duration-200">
+      <div className=" bg-blue-600 px-4 py-2 text-white hover:bg-amber-300 hover:text-black rounded-sm cursor-pointer transition-colors duration-200">
         {action}
       </div>
     </div>

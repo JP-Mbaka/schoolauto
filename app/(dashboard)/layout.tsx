@@ -7,7 +7,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <section className="w-full flex h-screen">
-      <div className="flex-1 flex flex-col max-sm:hidden">
+      <div className="not-printable print:hidden flex-1 flex flex-col max-sm:hidden">
         {/* Logo and Title */}
         <div className="w-full flex items-center space-x-2 py-3.5 justify-center bg-blue-600">
           <Image src="/logo.jpg" alt="School logo" width={45} height={50} />
@@ -48,7 +48,7 @@ export default function RootLayout({
           <Image src="/logo.jpg" alt="School logo" width={45} height={50} />
           <p>Auto Primary School</p>
         </div>
-        <div className="bg-blue-600 text-white flex-1 flex items-center justify-between px-12">
+        <div className="not-printable print:hidden bg-blue-600 text-white flex-1 flex items-center justify-between px-12">
           <h1>
             {
               '"Live as if you were to die tomorrow. Learn as if you were to live forever"'

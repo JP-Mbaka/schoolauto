@@ -11,12 +11,16 @@ function Payments() {
   useEffect(() => {
     setUserRole("teacher");
   }, []);
+
+  const handlePrint = () => {
+    window.print(); // Will only print what's visible in print media
+  };
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
       <Header userRole={userRole} title="Subject" action="Register" />
       <div className="flex-1 bg-slate-100 px-12 py-6">
         <div className="bg-white h-auto w-auto rounded-sm px-4 py-6">
-          <div className="flex justify-between items-center mb-2">
+          <div className="not-printable print:hidden flex justify-between items-center mb-2">
             <Dropdown
               label="Select Class"
               options={["Primary 1", "Primary 2", "Primary 3"]}
@@ -29,7 +33,12 @@ function Payments() {
                 </p> */}
 
             <div className="flex space-x-2">
-              <div className="px-4 py-2 bg-green-400">Print</div>
+              <div
+                onClick={handlePrint}
+                className="cursor-pointer px-4 py-2 bg-green-400"
+              >
+                Print
+              </div>
               <div className="px-4 py-2 bg-blue-300">Export</div>
             </div>
           </div>

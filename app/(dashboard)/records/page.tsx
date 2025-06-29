@@ -4,6 +4,7 @@ import StatusFooter from "@/components/footer_component";
 import Header from "@/components/header_component";
 import TableComponent from "@/components/table_component";
 import React, { useEffect, useState } from "react";
+import ResultCard from "../../../components/result_card";
 
 function Amin() {
   const [userRole, setUserRole] = useState("");
@@ -12,10 +13,15 @@ function Amin() {
   useEffect(() => {
     setUserRole("teacher");
   }, []);
+
+  const handlePrint = () => {
+    window.print(); // Will only print what's visible in print media
+  };
+
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
       <Header userRole={userRole} title="Records" action="Create" />
-      <div className="flex-1 bg-slate-100 px-12 py-6">
+      <div className="not-printable print:hidden flex-1 bg-slate-100 px-12 py-6">
         <div className="bg-white h-auto w-auto rounded-sm px-4 py-6">
           <div className="flex justify-between items-center mb-2">
             <Dropdown
@@ -30,7 +36,9 @@ function Amin() {
                 </p> */}
 
             <div className="flex space-x-2">
-              <div className="px-4 py-2 bg-green-400">Print</div>
+              <div onClick={handlePrint} className="px-4 py-2 bg-green-400">
+                Print
+              </div>
               <div className="px-4 py-2 bg-blue-300">Export</div>
             </div>
           </div>
@@ -45,7 +53,6 @@ function Amin() {
             />
           </div>
         </div>
-        <div></div>
       </div>
       {/* <Footer /> */}
       {userRole == "teacher" && (
@@ -61,6 +68,9 @@ function Amin() {
           failedStudents={3}
         />
       )}
+      <div className="hidden print:block">
+        <ResultCard />
+      </div>
     </div>
   );
 }

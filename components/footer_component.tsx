@@ -46,7 +46,7 @@ const StatusFooter: React.FC<StatusFooterProps> = ({
   const valueClass = "text-blue-700";
 
   return (
-    <div className="w-full bg-white border-t border-gray-300 px-4 py-3 mt-6 rounded-sm shadow-sm">
+    <div className="not-printable print:hidden w-full bg-white border-t border-gray-300 px-4 py-3 mt-6 rounded-sm shadow-sm">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-6">
         <div className={itemClass}>
           <span className={labelClass}>Session</span>

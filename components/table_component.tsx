@@ -77,7 +77,7 @@ function TableComponent<T extends Record<string, unknown>>({
   return (
     <div className="w-full">
       {/* Search Input */}
-      <div className="mb-4 flex justify-between items-center">
+      <div className="not-printable print:hidden mb-4 flex justify-between items-center">
         <div className="text-sm text-gray-600">
           Showing {startIdx + 1} to {endIdx} of {totalEntries} entries
         </div>
@@ -146,7 +146,7 @@ function TableComponent<T extends Record<string, unknown>>({
       </div>
 
       {/* Pagination Controls */}
-      <div className="mt-4 flex justify-end items-center gap-4">
+      <div className="not-printable print:hidden mt-4 flex justify-end items-center gap-4">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
