@@ -20,7 +20,7 @@ const ResultCard = forwardRef<HTMLDivElement>((_, ref) => {
       <table className="mt-4 w-full border text-sm">
         <thead className="bg-gray-100">
           <tr>
-            <th className="border p-2">Subject</th>
+            <th className="border p-2">Subject</th>  
             <th className="border p-2">Score</th>
             <th className="border p-2">Grade</th>
           </tr>
