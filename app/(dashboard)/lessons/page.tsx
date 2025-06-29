@@ -1,11 +1,10 @@
 "use client";
 import Dropdown from "@/components/custom_dropdown";
-import StatusFooter from "@/components/footer_component";
 import Header from "@/components/header_component";
 import TableComponent from "@/components/table_component";
 import React, { useEffect, useState } from "react";
 
-function Amin() {
+function Payments() {
   const [userRole, setUserRole] = useState("");
   const [selected, setSelected] = useState("");
 
@@ -14,7 +13,7 @@ function Amin() {
   }, []);
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
-      <Header userRole={userRole} title="Records" action="Create" />
+      <Header userRole={userRole} title="Lesson" action="New Lesson" />
       <div className="flex-1 bg-slate-100 px-12 py-6">
         <div className="bg-white h-auto w-auto rounded-sm px-4 py-6">
           <div className="flex justify-between items-center mb-2">
@@ -48,21 +47,8 @@ function Amin() {
         <div></div>
       </div>
       {/* <Footer /> */}
-      {userRole == "teacher" && (
-        <StatusFooter
-          session="2024/2025"
-          term="Second"
-          year="JSS 2"
-          classAverage={72.5}
-          averageStudents={15}
-          totalStudents={30}
-          noCA={2}
-          noExam={1}
-          failedStudents={3}
-        />
-      )}
     </div>
   );
 }
 
-export default Amin;
+export default Payments;

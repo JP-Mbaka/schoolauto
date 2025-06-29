@@ -18,9 +18,9 @@ export default function RootLayout({
             { label: "Records", link: "/records" },
             { label: "Payment", link: "/payments" },
             { label: "Users", link: "/users" },
-            { label: "Courses", link: "#" },
-            // /courses
-            { label: "Lessons", link: "#" }, ///lessons
+            { label: "Subjects", link: "/courses" },
+
+            { label: "Lessons", link: "/lessons" },
           ].map((e0, k) => (
             <Link key={k} href={e0["link"]}>
               <div
