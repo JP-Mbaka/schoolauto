@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "./ui/button";
+import SimpleModal from "./create_user_modal";
 
 interface HeaderProps {
   userRole: string;
@@ -7,6 +9,16 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleUserCreate = (user: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    console.log("New user created:", user);
+    // send to backend...
+  };
   return (
     <div className="not-printable print:hidden bg-white py-4 px-12 flex justify-between items-center">
       <div>
@@ -18,8 +30,17 @@ const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
             : title}
         </h1>
       </div>
-      <div className=" bg-blue-600 px-4 py-2 text-white hover:bg-amber-300 hover:text-black rounded-sm cursor-pointer transition-colors duration-200">
-        {action}
+      <div
+        onClick={() => setOpen(true)}
+        className=" bg-blue-600 px-4 py-2 text-white hover:bg-amber-300 hover:text-black rounded-sm cursor-pointer transition-colors duration-200"
+      >
+        <Button> {action}</Button>
+
+        <SimpleModal
+          open={open}
+          onClose={() => setOpen(false)}
+          onSubmit={handleUserCreate}
+        />
       </div>
     </div>
   );

@@ -15,3 +15,6 @@ export const exportToExcel = (jsonData: object[], fileName = "data") => {
   const data = new Blob([excelBuffer], { type: "application/octet-stream" });
   saveAs(data, `${fileName}.xlsx`);
 };
+
+export const parseStringify = (value: unknown) =>
+  JSON.parse(JSON.stringify(value));
