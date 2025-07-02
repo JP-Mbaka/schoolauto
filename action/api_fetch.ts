@@ -1,3 +1,4 @@
+"use server";
 const { BACKEND_API_BASE_URL: baseURL } = process.env;
 
 export const postData = async (url: string, data: unknown) => {
@@ -8,8 +9,8 @@ export const postData = async (url: string, data: unknown) => {
     body: JSON.stringify(data),
   });
   if (!res.ok) {
-    //Check error for 200, 202, 201, 300, 400, Ivalid request and so far
-    throw new Error(`${data} Error: Network response was not ok`);
+    //Check error for 200, 202, 201, 300, 400, Invalid request and so far
+    throw new Error(`${res.status}: ${res.body} ${baseURL + "/" + url}`);
   }
   return res.json();
 };
