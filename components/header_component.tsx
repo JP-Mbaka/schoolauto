@@ -4,7 +4,6 @@ import SimpleModal from "./create_user_modal";
 import { createAccountSchema } from "@/types";
 import z from "zod";
 import { createUserAccount } from "@/action/auth_action";
-
 interface HeaderProps {
   userRole: string;
   title: string;
