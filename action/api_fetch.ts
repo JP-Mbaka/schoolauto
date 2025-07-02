@@ -3,16 +3,31 @@ const { BACKEND_API_BASE_URL: baseURL } = process.env;
 
 export const postData = async (url: string, data: unknown) => {
   console.log(`WEFGHJKIUYTREWSQ\n ${baseURL} QWERTYUIOIUYTREWQ`);
-  const res = await fetch(baseURL + "/" + url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) {
-    //Check error for 200, 202, 201, 300, 400, Invalid request and so far
-    throw new Error(`${res.status}: ${res.body} ${baseURL + "/" + url}`);
+  try {
+    const res = await fetch(baseURL + "/" + url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      let message = res.statusText;
+      try {
+        const text = await res.text();
+        const json = JSON.parse(text);
+        message = json.message || JSON.stringify(json);
+      } catch (e) {
+        // Ignore parse errors and keep fallback message
+        console.log(e);
+      }
+      throw new Error(`Error ${res.status}: ${message}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error; // Re-throw so caller can handle
   }
-  return res.json();
 };
 
 export const putData = async (url: string, data: unknown) => {
@@ -67,5 +82,5 @@ export const getData = async (url: string, token?: string) => {
     throw new Error(`${res.status}: ${res.statusText} ${fullUrl}`);
   }
 
-  return res.json();
+  return await res.json();
 };

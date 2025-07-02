@@ -5,12 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { authType } from "@/helper/formtype";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Image from "next/image";
+import { loginAccount } from "@/action/auth_action";
+import { useRouter } from "next/navigation";
+import LoadingSimpleModal from "@/components/loading";
 
 function Auth() {
+  const route = useRouter();
+  const [loading, setLoading] = useState(false);
   const formBase = useForm<z.infer<typeof authType>>({
     resolver: zodResolver(authType),
     defaultValues: {
@@ -19,8 +24,20 @@ function Auth() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof authType>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof authType>) => {
+    console.log(JSON.stringify(values) + "Login message going on");
+    try {
+      setLoading(true);
+      const res = await loginAccount(values);
+      console.log(res);
+      if (res["success"]) {
+        route.push("/records");
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log("Error from login in user" + error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,6 +84,12 @@ function Auth() {
           <span className="text-blue-600 font-semibold">Sign Up</span>
         </h1>
       </section>
+      <LoadingSimpleModal
+        open={loading}
+        onClose={function (): void {
+          setLoading(false);
+        }}
+      />
     </section>
   );
 }

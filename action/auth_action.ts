@@ -3,6 +3,7 @@ import { parseStringify } from "@/helper/other";
 import { getData, postData } from "./api_fetch";
 import { z } from "zod";
 import { createAccountSchema } from "@/types";
+import { authType } from "@/helper/formtype";
 
 export const createUserAccount = async (
   data: z.infer<typeof createAccountSchema>
@@ -13,6 +14,18 @@ export const createUserAccount = async (
     return parseStringify(res);
   } catch (error) {
     throw new Error(`${error}`);
+  }
+};
+export const loginAccount = async (data: z.infer<typeof authType>) => {
+  try {
+    const res = await postData("auth/login", data);
+
+    return parseStringify(res);
+  } catch (error) {
+    // throw new Error(
+    //   `${error instanceof Error ? error.message : String(error)}`
+    // );
+    console.log(error);
   }
 };
 
