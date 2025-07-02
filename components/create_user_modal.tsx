@@ -39,12 +39,18 @@ export default function SimpleModal({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <form
-        onSubmit={form.handleSubmit((data) => {
-          console.log("Submitted data:", data);
-          onSubmit(data);
-          onClose();
-          form.reset();
-        })}
+        onSubmit={form.handleSubmit(
+          (data) => {
+            console.log("✅ Submitted data:", data);
+            onSubmit(data);
+            onClose();
+            form.reset();
+          },
+          (errors) => {
+            console.warn("❌ Validation errors:", errors);
+            // Don’t close modal here
+          }
+        )}
         className="bg-white rounded-lg p-6 w-full max-w-md"
       >
         <h2 className="text-xl font-bold mb-4">Create New User</h2>

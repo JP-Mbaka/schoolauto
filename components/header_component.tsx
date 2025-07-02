@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import SimpleModal from "./create_user_modal";
 import { createAccountSchema } from "@/types";
 import z from "zod";
+import { createUserAccount } from "@/action/auth_action";
 
 interface HeaderProps {
   userRole: string;
@@ -18,10 +19,14 @@ const Header: React.FC<HeaderProps> = ({
   const [open, setOpen] = useState(false);
 
   //this function calls the create account
-  const handleUserCreate = (user: z.infer<typeof createAccountSchema>) => {
+  const handleUserCreate = async (
+    user: z.infer<typeof createAccountSchema>
+  ) => {
     console.log("New user created:", user);
     // send to backend...
     try {
+      const res = await createUserAccount(user);
+      console.log("New user created :", res);
     } catch (error) {
       console.log("New user created Error Message:", error);
     } finally {

@@ -27,10 +27,10 @@ export interface createAccountResponse {
 }
 
 export const createAccountSchema = z.object({
-  email: z.string(),
-  role: z.string(),
-  first_name: z.string(),
-  last_name: z.string(),
+  email: z.string().min(1),
+  role: z.string().min(1),
+  first_name: z.string().min(1),
+  last_name: z.string().min(1),
   student_id: z.string().optional(),
-  teacher_id: z.number().optional(),
+  teacher_id: z.string().optional(),
 });

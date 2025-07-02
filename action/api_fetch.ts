@@ -1,5 +1,7 @@
+const { BACKEND_API_BASE_URL: baseURL } = process.env;
+
 export const postData = async (url: string, data: unknown) => {
-  const { BACKEND_API_BASE_URL: baseURL } = process.env;
+  console.log(`WEFGHJKIUYTREWSQ\n ${baseURL} QWERTYUIOIUYTREWQ`);
   const res = await fetch(baseURL + "/" + url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
