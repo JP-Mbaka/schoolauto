@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import SimpleModal from "./create_user_modal";
+import { createAccountSchema } from "@/types";
+import z from "zod";
 
 interface HeaderProps {
   userRole: string;
   title: string;
-  action: string;
+  actionTitle: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
+const Header: React.FC<HeaderProps> = ({
+  userRole,
+  title,
+  actionTitle: actionTitle,
+}) => {
   const [open, setOpen] = useState(false);
 
-  const handleUserCreate = (user: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
+  //this function calls the create account
+  const handleUserCreate = (user: z.infer<typeof createAccountSchema>) => {
     console.log("New user created:", user);
     // send to backend...
+    try {
+    } catch (error) {
+      console.log("New user created Error Message:", error);
+    } finally {
+      //we set loading state
+    }
   };
   return (
     <div className="not-printable print:hidden bg-white py-4 px-12 flex justify-between items-center">
@@ -30,11 +39,14 @@ const Header: React.FC<HeaderProps> = ({ userRole, title, action }) => {
             : title}
         </h1>
       </div>
-      <div
-        onClick={() => setOpen(true)}
-        className=" bg-blue-600 px-4 py-2 text-white hover:bg-amber-300 hover:text-black rounded-sm cursor-pointer transition-colors duration-200"
-      >
-        <Button> {action}</Button>
+      <div>
+        <Button
+          onClick={() => setOpen(true)}
+          className="bg-blue-600 hover:bg-amber-300 hover:text-black cursor-pointer transition-colors duration-200"
+        >
+          {" "}
+          {actionTitle}
+        </Button>
 
         <SimpleModal
           open={open}

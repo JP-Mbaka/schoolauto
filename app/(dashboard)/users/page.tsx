@@ -20,7 +20,7 @@ function Users() {
 
   return (
     <div className="h-full w-full bg-slate-100 flex flex-col">
-      <Header userRole={userRole} title="All Users" action="Invite User" />
+      <Header userRole={userRole} title="All Users" actionTitle="Invite User" />
       <div className="flex-1 bg-slate-100 px-12 py-6">
         <div className="bg-white h-auto w-auto rounded-sm px-4 py-6">
           <div className="not-printable print:hidden flex justify-between items-center mb-2">
