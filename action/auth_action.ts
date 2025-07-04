@@ -9,7 +9,7 @@ export const createUserAccount = async (
   data: z.infer<typeof createAccountSchema>
 ) => {
   try {
-    const res = await postData("auth/create-account", JSON.stringify(data));
+    const res = await postData("auth/create-account", data);
 
     return parseStringify(res);
   } catch (error) {
@@ -32,10 +32,7 @@ export const loginAccount = async (data: z.infer<typeof authType>) => {
 export const getAllUserAccounts = async () => {
   console.log("Execution started in getAll User Accounts");
   try {
-    const res = await getData(
-      "/auth/users?page=1&limit=10&role=STUDENT",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NTc0YmFmZC01YTAyLTQ3Y2YtOTQ4Yy1mMWIyMjI3MjQ0MDYiLCJlbWFpbCI6ImVjZWxpbmVhbWFyYWNoaUB5YWhvby5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJzdGF0dXMiOiJhY3RpdmUiLCJpYXQiOjE3NTE0NDk2NjUsImV4cCI6MTc1MjA1MjgwOH0.tHdEkPBOfW8ZWUPzfkG8AuomDybEuHN62RsQtEYbmFk"
-    );
+    const res = await getData("/auth/users?page=1&limit=10&role=STUDENT");
 
     console.log(
       "Execution started in getAll User Accounts:   " + res["data"]["users"]
