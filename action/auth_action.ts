@@ -3,7 +3,7 @@ import { parseStringify } from "@/helper/other";
 import { getData, postData } from "./api_fetch";
 import { z } from "zod";
 import { createAccountSchema } from "@/types";
-import { authType } from "@/helper/formtype";
+import { authType, changePassType } from "@/helper/formtype";
 
 export const createUserAccount = async (
   data: z.infer<typeof createAccountSchema>
@@ -22,9 +22,24 @@ export const loginAccount = async (data: z.infer<typeof authType>) => {
 
     return parseStringify(res);
   } catch (error) {
-    // throw new Error(
-    //   `${error instanceof Error ? error.message : String(error)}`
-    // );
+    throw new Error(
+      `${error instanceof Error ? error.message : String(error)}`
+    );
+    console.log(error);
+  }
+};
+export const changePass = async (data: z.infer<typeof changePassType>) => {
+  try {
+    const res = await postData("auth/change-password", {
+      current_password: data.currentPassword,
+      new_password: data.newPassword,
+    });
+
+    return parseStringify(res);
+  } catch (error) {
+    throw new Error(
+      `${error instanceof Error ? error.message : String(error)}`
+    );
     console.log(error);
   }
 };
