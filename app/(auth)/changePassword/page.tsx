@@ -41,7 +41,7 @@ function ChangePasswordPage() {
       <h1 className="text-black text-4xl max-md:text-2xl font-bold tracking-tighter font-[family-name:var(--font-geist-sans)]">
         Welcome Back!
       </h1>
-      <p className="tracking-widest my-2">Enter your email and password</p>
+      <p className="tracking-widest my-2">Follow the instructions below:</p>
       <section className=" w-[50%] max-md:w-full max-md:px-2">
         <Form {...formBase}>
           <form onSubmit={formBase.handleSubmit(onSubmit)}>
