@@ -3,20 +3,23 @@ import Dropdown from "@/components/custom_dropdown";
 import StatusFooter from "@/components/footer_component";
 import Header from "@/components/header_component";
 import TableComponent from "@/components/table_component";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ResultCard from "../../../components/result_card";
 import { sampleData } from "@/helper/data";
 import { exportToExcel } from "@/helper/other";
 import { createAccountResponse, SummaryRow } from "@/types";
-import { dataSubjects, records } from "@/data";
+import { dataSubjects, records, users } from "@/data";
 
 function Amin() {
   const [currentUser, setCurrentUser] = useState<createAccountResponse>();
   const [isSummary, setIsSummary] = useState(true);
   const [level, setLevel] = useState("");
   const [session, setSession] = useState("2024/2025");
-  const [selected, setSelected] = useState("");
-
+  const [subject, setSubject] = useState("");
+  const [term, setTerm] = useState("");
+  const [tableData, setTableData] = useState<TableRow[]>([]);
+  const hasSetSummary = useRef(false);
+  // Set the current user only once
   useEffect(() => {
     setCurrentUser({
       success: true,
@@ -46,10 +49,13 @@ function Amin() {
         },
       },
     });
-    if (currentUser?.data.user.role === "TEACHER") {
-      setIsSummary(false); // teacher sees detailed records by default
-    } else {
-      setIsSummary(true); // students see summary by default
+  }, []); // Only run once
+
+  // Handle isSummary logic after user is set
+  useEffect(() => {
+    if (!hasSetSummary.current && currentUser?.data?.user?.role) {
+      setIsSummary(currentUser.data.user.role !== "TEACHER"); // Students get true, Teachers false
+      hasSetSummary.current = true;
     }
   }, [currentUser]);
 
@@ -58,6 +64,51 @@ function Amin() {
   };
 
   type TableRow = Record<string, unknown>;
+
+  const fetchTeachersRecords = useCallback((): TableRow[] => {
+    const matchedSubject = dataSubjects.find(
+      (sub) => sub.subjectTitle === subject && sub.level === level
+    );
+
+    return records
+      .filter((record) => record.session === session)
+      .flatMap((record) =>
+        record.subjects
+          .filter(
+            (subjectItem) =>
+              subjectItem.level === level &&
+              subjectItem.term.toString() === term &&
+              subjectItem.subjectId === matchedSubject?.subjectId
+          )
+          .map((subjectItem) => {
+            const caScores: Record<string, number> = {};
+            subjectItem.ca.forEach((ca, idx) => {
+              caScores[`CA${idx + 1}`] = ca.score;
+            });
+
+            const matchedUser = users.find(
+              (user) => user.data.user.user_uuid === record.userId
+            );
+
+            return {
+              Subject:
+                matchedUser?.data.user.last_name +
+                  " " +
+                  matchedUser?.data.user.first_name || "Unknown Subject",
+              ...caScores,
+              EXAM: subjectItem.exam.score,
+              AVERAGE: subjectItem.gradeAverage,
+              POSITION: subjectItem.position,
+            };
+          })
+      );
+  }, [session, term, subject, level]);
+  useEffect(() => {
+    if (session && term && subject && level) {
+      const data = fetchTeachersRecords();
+      setTableData(data);
+    }
+  }, [fetchTeachersRecords, session, term, subject, level]);
 
   const fetchUserSummary = (userId: string): SummaryRow[] => {
     const userRecords = records.filter((record) => record.userId === userId);
@@ -138,13 +189,16 @@ function Amin() {
     setIsSummary(true);
   };
 
-  const generatedData = isSummary
-    ? fetchUserSummary(currentUser?.data.user.user_uuid ?? "")
-    : fetchRecords(currentUser?.data.user.user_uuid ?? "", level, session);
+  const generatedData =
+    currentUser?.data.user.role == "TEACHER"
+      ? fetchTeachersRecords()
+      : isSummary
+      ? fetchUserSummary(currentUser?.data.user.user_uuid ?? "")
+      : fetchRecords(currentUser?.data.user.user_uuid ?? "", level, session);
   const columnsKey =
     generatedData.length > 0 ? Object.keys(generatedData[0]) : [];
 
-  if (isSummary) {
+  if (isSummary || currentUser?.data.user.role == "TEACHER") {
     columnsKey.push("Actions");
   }
   return (
@@ -176,9 +230,9 @@ function Amin() {
                   {currentUser?.data.user.role == "TEACHER" ? (
                     <Dropdown
                       label="Select Class"
-                      options={["Primary 1", "Primary 2", "Primary 3"]}
-                      value={selected}
-                      onChange={setSelected}
+                      options={["SS1", "SS2", "SS3"]} //["Primary 1", "Primary 2", "Primary 3"]
+                      value={level}
+                      onChange={setLevel}
                     />
                   ) : (
                     <div></div>
@@ -186,9 +240,9 @@ function Amin() {
                   {currentUser?.data.user.role == "TEACHER" ? (
                     <Dropdown
                       label="Select Term"
-                      options={["1st Term", "2nd Term", "3rd Term"]}
-                      value={selected}
-                      onChange={setSelected}
+                      options={["1", "2", "3", "4"]} //["1st Term", "2nd Term", "3rd Term"]
+                      value={term}
+                      onChange={setTerm}
                     />
                   ) : (
                     <div></div>
@@ -197,8 +251,8 @@ function Amin() {
                     <Dropdown
                       label="Select Session"
                       options={["2023/2024", "2024/2025", "2025/2026"]}
-                      value={selected}
-                      onChange={setSelected}
+                      value={session}
+                      onChange={setSession}
                     />
                   ) : (
                     <div></div>
@@ -206,9 +260,9 @@ function Amin() {
                   {currentUser?.data.user.role == "TEACHER" ? (
                     <Dropdown
                       label="Select Subject"
-                      options={["English", "Mathematics", "Chemistry"]}
-                      value={selected}
-                      onChange={setSelected}
+                      options={["English Language", "Mathematics", "Chemistry"]}
+                      value={subject}
+                      onChange={setSubject}
                     />
                   ) : (
                     <div></div>
@@ -239,20 +293,33 @@ function Amin() {
                 </div>
               </div>
               <div>
-                <TableComponent
-                  columns={columnsKey}
-                  data={fetchRecords(
-                    currentUser?.data.user.user_uuid ?? "",
-                    level,
-                    session
-                  )}
-                  userRole={
-                    currentUser?.data.user.role == "STUDENT"
-                      ? "STUDENT"
-                      : "TEACHER"
-                  }
-                  isSummary={isSummary}
-                />
+                {currentUser?.data.user.role == "TEACHER" ? (
+                  <TableComponent
+                    columns={columnsKey}
+                    data={tableData}
+                    userRole={
+                      currentUser?.data.user.role == "TEACHER"
+                        ? "TEACHER"
+                        : "STUDENT"
+                    }
+                    isSummary={isSummary}
+                  />
+                ) : (
+                  <TableComponent
+                    columns={columnsKey}
+                    data={fetchRecords(
+                      currentUser?.data.user.user_uuid ?? "",
+                      level,
+                      session
+                    )}
+                    userRole={
+                      currentUser?.data.user.role == "STUDENT"
+                        ? "STUDENT"
+                        : "TEACHER"
+                    }
+                    isSummary={isSummary}
+                  />
+                )}
               </div>
             </div>
           </div>

@@ -774,7 +774,7 @@ export const records: gradesType[] = [
     studentTotal: 0,
     classAverage: 0.0,
     classPosition: 2,
-    session: "",
+    session: "2023/2024",
   },
   {
     gradeId: "grd000",
