@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import EditModal from "./edit_modal";
 
 interface TableProps<T> {
   columns: string[];
@@ -15,14 +16,24 @@ const TableComponent = <T extends Record<string, unknown>>({
   isSummary,
   checkResult,
 }: TableProps<T>) => {
+  const [viewModalData, setViewModalData] = useState<T | null>(null);
+  const [editModalData, setEditModalData] = useState<T | null>(null);
+  const [tableData, setTableData] = useState<T[]>(data);
+
   const handleView = (row: T) => {
-    console.log("View:", row);
-    // Add navigation or modal logic here
+    setViewModalData(row);
   };
 
   const handleEdit = (row: T) => {
-    console.log("Edit:", row);
-    // Add edit logic here
+    setEditModalData(row);
+  };
+
+  const handleEditComplete = (updatedRow: T) => {
+    const updatedData = tableData.map((item) =>
+      item.id === updatedRow.id ? updatedRow : item
+    );
+    setTableData(updatedData);
+    setEditModalData(null);
   };
 
   return (
@@ -79,6 +90,36 @@ const TableComponent = <T extends Record<string, unknown>>({
           ))}
         </tbody>
       </table>
+      {/* View Modal */}
+      {viewModalData && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded shadow-lg w-96">
+            <h2 className="text-lg font-bold mb-4">View Details</h2>
+            <ul className="text-sm">
+              {Object.entries(viewModalData).map(([key, value]) => (
+                <li key={key}>
+                  <strong>{key}:</strong> {String(value)}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => setViewModalData(null)}
+              className="mt-4 px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Modal */}
+      {editModalData && (
+        <EditModal
+          data={editModalData}
+          onClose={() => setEditModalData(null)}
+          onSave={handleEditComplete}
+        />
+      )}
     </div>
   );
 };

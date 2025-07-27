@@ -19,6 +19,14 @@ function Amin() {
   const [term, setTerm] = useState("");
   const [tableData, setTableData] = useState<TableRow[]>([]);
   const hasSetSummary = useRef(false);
+
+  const uniqueSubjectTitles = Array.from(
+    new Set(dataSubjects.map((subject) => subject.subjectTitle))
+  );
+  const uniqueLevel = Array.from(
+    new Set(dataSubjects.map((subject) => subject.level))
+  );
+
   // Set the current user only once
   useEffect(() => {
     setCurrentUser({
@@ -230,7 +238,7 @@ function Amin() {
                   {currentUser?.data.user.role == "TEACHER" ? (
                     <Dropdown
                       label="Select Class"
-                      options={["SS1", "SS2", "SS3"]} //["Primary 1", "Primary 2", "Primary 3"]
+                      options={uniqueLevel} //["Primary 1", "Primary 2", "Primary 3"]
                       value={level}
                       onChange={setLevel}
                     />
@@ -260,7 +268,7 @@ function Amin() {
                   {currentUser?.data.user.role == "TEACHER" ? (
                     <Dropdown
                       label="Select Subject"
-                      options={["English Language", "Mathematics", "Chemistry"]}
+                      options={uniqueSubjectTitles}
                       value={subject}
                       onChange={setSubject}
                     />
