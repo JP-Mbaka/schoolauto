@@ -89,7 +89,7 @@ export default function Home() {
         </div>
       </div>
       <footer className="bg-blue-600 text-white text-center py-4">
-        <p className="font-bold">Group 5</p>
+        <p className="font-bold">Group 11</p>
         <p>Course Code: CSC320</p>
         <p>Course Title: Software Laboratory</p>
       </footer>
