@@ -1,103 +1,84 @@
+import TextScrollCarousel from "@/components/text_carousel";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div>
+      <div className="flex w-full h-screen">
+        <div className="flex-3/5 bg-pink-50 bg-opacity-35">
+          <ul className="flex space-x-6 justify-center font-bold p-5 m-10">
+            <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
+              Home
+            </li>
+            <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
+              About Us
+            </li>
+            <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
+              Course
+            </li>
+            <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
+              Blog
+            </li>
+            <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
+              Contact Us
+            </li>
+          </ul>
+          <div className="font-bold pt-25 left-1/6 relative">
+            {" "}
+            <span className="text-amber-300">*</span> 30 Days free trial
+          </div>
+          <p className="font-bold text-blue-600 left-1/6 relative text-7xl">
+            Build Your Skills
+          </p>
+          <p className="font-bold text-blue-600 left-1/6 relative text-7xl p-2">
+            on the{" "}
+            <span className="bg-amber-300 rounded-lg px-4 text-white">
+              Best
+            </span>
+          </p>
+          <p className="font-bold text-blue-600 left-1/6 relative text-7xl">
+            Platform
+          </p>
+          <p className="font-bold left-1/6 relative">
+            Find Unlimited Courses That Matches Your Niche to Hasten the
+          </p>
+          <p className="font-bold left-1/6 relative">
+            Process Of Developing Your Skills
+          </p>
+          <div className="flex left-1/6 relative mt-8">
+            <button className="border-0 text-white rounded-lg bg-blue-600 px-6 py-2">
+              Get Started
+            </button>
+            <p className="font-bold px-12">Video Play</p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex-2/5 bg-blue-600">
+          <button className="border-1 text-white m-10 rounded-lg px-6 py-2 ">
+            Log In
+          </button>
+          <button className="border-1 text-blue-600 m-2 rounded-lg px-6 py-2 bg-amber-300">
+            Register
+          </button>
+        </div>
+        <div className=" h-2/3 w-3xl absolute z-20 top-1/4 left-2/5 rounded-2xl">
+          <Image src={"/girl.png"} alt="" fill className="rounded-2xl" />
+        </div>
+      </div>
+
+      <div className="w-full h-screen bg-white">
+        <p className="font-bold pt-25 text-center">
+          <span className="text-amber-300">*</span> Course Categories
+        </p>
+        <p className="font-bold text-6xl text-center pt-4">
+          Explore our Course Categories
+        </p>
+        <p className="font-bold text-center pt-4">
+          For everyone of you we offer a variety of distinctive benefits.
+        </p>
+        <div className="px-24">
+          <TextScrollCarousel />
+        </div>
+      </div>
     </div>
   );
 }
