@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import SimpleModal from "./create_user_modal";
-import { createAccountSchema } from "@/types";
+import { createAccountSchema, gradesType } from "@/types";
 import z from "zod";
 import { createUserAccount } from "@/action/auth_action";
+import { CreateRecordModal } from "./create_modal_record";
 interface HeaderProps {
   userRole: string;
   title: string;
@@ -15,7 +16,16 @@ const Header: React.FC<HeaderProps> = ({
   title,
   actionTitle: actionTitle,
 }) => {
-  const [open, setOpen] = useState(false);
+  //User
+  const [openUserModal, setOpenUserModal] = useState(false);
+  //RECORDS
+  const [records, setRecords] = useState<gradesType[]>([]);
+  const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
+
+  const addRecord = (record: gradesType) =>
+    setRecords((prev) => [...prev, record]);
+  // const importRecords = (data: gradesType[]) =>
+  //   setRecords((prev) => [...prev, ...data]);
 
   //this function calls the create account
   const handleUserCreate = async (
@@ -36,8 +46,8 @@ const Header: React.FC<HeaderProps> = ({
     <div className="not-printable print:hidden bg-white py-4 px-12 flex justify-between items-center">
       <div>
         <h1 className="text-2xl font-semibold">
-          {title == "records"
-            ? userRole === "teacher"
+          {title == "Records"
+            ? userRole != "teacher"
               ? "Records"
               : "Result"
             : title}
@@ -45,19 +55,30 @@ const Header: React.FC<HeaderProps> = ({
       </div>
       <div>
         <Button
-          onClick={() => setOpen(true)}
+          onClick={() =>
+            title == "Records"
+              ? setIsRecordModalOpen(true)
+              : setOpenUserModal(true)
+          }
           className="bg-blue-600 hover:bg-amber-300 hover:text-black cursor-pointer transition-colors duration-200"
         >
           {" "}
           {actionTitle}
         </Button>
 
+        {/* //CREATE USER MODAL */}
         <SimpleModal
-          open={open}
-          onClose={() => setOpen(false)}
+          open={openUserModal}
+          onClose={() => setOpenUserModal(false)}
           onSubmit={handleUserCreate}
         />
       </div>
+      {/* //CREATE RECORD MODAL */}
+      <CreateRecordModal
+        isOpen={isRecordModalOpen}
+        onClose={() => setIsRecordModalOpen(false)}
+        onCreate={() => addRecord}
+      />
     </div>
   );
 };
