@@ -586,7 +586,7 @@ export const users: createAccountResponse[] = [
       user: {
         user_uuid: "stu001",
         email: "mbakajohpaul@gmail.com",
-        role: "STUDENT",
+        role: "TEACHER",
         status: "active",
         salutation: "Master",
         first_name: "JohnPaul",
@@ -670,11 +670,11 @@ export const users: createAccountResponse[] = [
       user: {
         user_uuid: "stu004",
         email: "mbakajohpaul@gmail.com",
-        role: "STUDENT",
+        role: "TEACHER",
         status: "active",
         salutation: "Master",
-        first_name: "JohnPaul Chidera",
-        last_name: "Mbaka",
+        first_name: "Aduroja",
+        last_name: "JohnPaul",
         phone: "+2349133950084",
         profile_picture: "",
         student_id: "stu004",
