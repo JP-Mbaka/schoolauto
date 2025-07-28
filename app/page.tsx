@@ -1,5 +1,6 @@
 import TextScrollCarousel from "@/components/text_carousel";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -53,19 +54,27 @@ export default function Home() {
           </div>
         </div>
         <div className="flex-2/5 bg-blue-600">
-          <button className="border-1 text-white m-10 rounded-lg px-6 py-2 ">
-            Log In
-          </button>
-          <button className="border-1 text-blue-600 m-2 rounded-lg px-6 py-2 bg-amber-300">
-            Register
-          </button>
+          <div className="mt-12">
+            <Link
+              href={"/auth"}
+              className="border-1 text-white m-10 rounded-lg px-6 py-2 "
+            >
+              Log In
+            </Link>
+            <Link
+              href={"/auth"}
+              className="border-1 text-blue-600 m-10 rounded-lg px-6 py-2 bg-amber-300"
+            >
+              Register
+            </Link>
+          </div>
         </div>
         <div className=" h-2/3 w-3xl absolute z-20 top-1/4 left-2/5 rounded-2xl">
           <Image src={"/girl.png"} alt="" fill className="rounded-2xl" />
         </div>
       </div>
 
-      <div className="w-full h-screen bg-white">
+      <div className="w-full h-2/3 bg-white">
         <p className="font-bold pt-25 text-center">
           <span className="text-amber-300">*</span> Course Categories
         </p>
@@ -79,6 +88,11 @@ export default function Home() {
           <TextScrollCarousel />
         </div>
       </div>
+      <footer className="bg-blue-600 text-white text-center py-4">
+        <p className="font-bold">Group 5</p>
+        <p>Course Code: CSC320</p>
+        <p>Course Title: Software Laboratory</p>
+      </footer>
     </div>
   );
 }

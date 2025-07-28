@@ -9,9 +9,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Image from "next/image";
-import { loginAccount } from "@/action/auth_action";
+// import { loginAccount } from "@/action/auth_action";
 import { useRouter } from "next/navigation";
 import LoadingSimpleModal from "@/components/loading";
+import { users } from "@/data";
 
 function Auth() {
   const route = useRouter();
@@ -24,18 +25,45 @@ function Auth() {
     },
   });
 
+  // const onSubmit = async (values: z.infer<typeof authType>) => {
+  //   console.log(JSON.stringify(values) + "Login message going on");
+  //   try {
+  //     setLoading(true);
+  //     const res = await loginAccount(values);
+  //     console.log(res);
+  //     if (res["success"]) {
+  //       route.push("/records");
+  //     }
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log("Error from login in user" + error);
+  //     setLoading(false);
+  //   }
+  // };
+
   const onSubmit = async (values: z.infer<typeof authType>) => {
-    console.log(JSON.stringify(values) + "Login message going on");
+    console.log(JSON.stringify(values) + " Login check starting");
+
     try {
       setLoading(true);
-      const res = await loginAccount(values);
-      console.log(res);
-      if (res["success"]) {
+
+      // Check if input email matches any user's first_name (case-insensitive)
+      const matchedUser = users.find(
+        (user) =>
+          user.success &&
+          user.data.user.first_name.toLowerCase() === values.email.toLowerCase()
+      );
+
+      if (matchedUser) {
+        console.log("User matched:", matchedUser.data.user);
         route.push("/records");
+      } else {
+        console.log("No matching user found with first name:", values.email);
       }
+
       setLoading(false);
     } catch (error) {
-      console.log("Error from login in user" + error);
+      console.log("Error during login: " + error);
       setLoading(false);
     }
   };
@@ -52,7 +80,7 @@ function Auth() {
             <CustomInput
               control={formBase.control}
               name="email"
-              placeHolder="Enter your email"
+              placeHolder="Enter your first Name"
               label="Email"
             />
             <CustomInput
