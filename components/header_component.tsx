@@ -74,6 +74,7 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
       {/* //CREATE RECORD MODAL */}
+      {records.length > 0 && <></>}
       <CreateRecordModal
         isOpen={isRecordModalOpen}
         onClose={() => setIsRecordModalOpen(false)}
