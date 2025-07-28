@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const authType = z.object({
-  email: z.string().email(),
+  email: z.string().min(1),
   password: z.string().min(8),
 });
 
