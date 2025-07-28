@@ -81,7 +81,12 @@ function Users() {
             </div>
           </div>
           <div>
-            <TableComponent columns={columnsKey} data={users} />
+            <TableComponent
+              columns={columnsKey}
+              data={users}
+              userRole={"TEACHER"}
+              isSummary={false}
+            />
           </div>
         </div>
         <div></div>
