@@ -51,7 +51,7 @@ function Payments() {
             </div>
           </div>
           <div>
-            <TableComponent columns={columnsKey} data={sampleData} />
+            <TableComponent columns={columnsKey} data={sampleData} userRole={"TEACHER"} isSummary={false} />
           </div>
         </div>
         <div></div>
