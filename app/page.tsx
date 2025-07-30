@@ -50,7 +50,6 @@ export default function Home() {
             <button className="border-0 text-white rounded-lg bg-blue-600 px-6 py-2">
               Get Started
             </button>
-            <p className="font-bold px-12">Video Play</p>
           </div>
         </div>
         <div className="flex-2/5 bg-blue-600">
@@ -74,7 +73,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full h-2/3 bg-white">
+      <div className="w-full h-3/4 bg-white">
         <p className="font-bold pt-25 text-center">
           <span className="text-amber-300">*</span> Course Categories
         </p>
@@ -86,6 +85,59 @@ export default function Home() {
         </p>
         <div className="px-24">
           <TextScrollCarousel />
+        </div>
+      </div>
+      <div className="bg-blue-600 flex w-full justify-center py-10">
+        <p className="text-white pr-10 text-4xl">260k+</p>
+        <p className="text-white pr-10 text-4xl">24+</p>
+        <p className="text-white pr-10 text-4xl">550+</p>
+        <p className="text-white pr-10 text-4xl">2M+</p>
+      </div>
+      <div className="w-full h-2/3 flex justify-center">
+        <div className=" relative w-150 h-150 ml-10 mt-25 mb-25">
+          <Image src={"/girl.png"} alt="" fill className="rounded-lg" />
+        </div>
+        <div className="flex justify-center items-center">
+          <div>
+            <p className="font-bold ml-10">
+              <span className="text-amber-300">*</span> About Us
+            </p>
+            <p className="font-bold ml-10 text-4xl py-4 w-2/3">
+              {"Educate The Populace to\nAdvance The Nation"}
+            </p>
+            <p className="font-bold ml-10 py-1/2">
+              This can be accomplished by highlighting any awards or
+              recognitions
+              <p>
+                {" "}
+                that the company has received as well as any partnerships or
+              </p>
+              <p>
+                {" "}
+                collaborations that has turned with other industry loaders.
+              </p>
+            </p>
+            <p className="font-bold ml-10 py-3">
+              This information can help potential customers feel more confident
+              in
+              <p>the LMS and its ability to meet their needs.</p>
+            </p>
+            <div className="grid-cols-2 grid space-y-5 ml-10">
+              {[
+                "Unique Support System",
+                "Life Time Support",
+                "Get Certificate",
+                "Accounting instructor",
+              ].map((n, index) => (
+                <div key={index} className="flex gap-5 items-center">
+                  <div className="h-5 w-5 bg-blue-600 p-0.5 flex justify-center items-center rounded-full">
+                    <div className="h-2 w-2 bg-amber-50 rounded-full"></div>
+                  </div>
+                  <span>{n}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <footer className="bg-blue-600 text-white text-center py-4">
