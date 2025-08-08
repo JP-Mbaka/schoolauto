@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>
-      <div className="flex w-full h-screen">
-        <div className="flex-3/5 bg-pink-50 bg-opacity-35">
-          <ul className="flex space-x-6 justify-center font-bold p-5 m-10">
+    <main>
+      <section className="flex w-full h-screen justify-between">
+        <nav className="flex absolute">
+          <ul className="flex space-x-6 font-bold p-5 m-10">
             <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
               Home
             </li>
@@ -24,6 +24,22 @@ export default function Home() {
               Contact Us
             </li>
           </ul>
+          <div className="mt-12">
+            <Link
+              href={"/auth"}
+              className="border-1 text-white m-10 rounded-lg px-6 py-2 "
+            >
+              Log In
+            </Link>
+            <Link
+              href={"/auth"}
+              className="border-1 text-blue-600 m-10 rounded-lg px-6 py-2 bg-amber-300"
+            >
+              Register
+            </Link>
+          </div>
+        </nav>
+        <div className="flex-3/5 bg-pink-50 bg-opacity-35">
           <div className="font-bold pt-25 left-1/6 relative">
             {" "}
             <span className="text-amber-300">*</span> 30 Days free trial
@@ -52,27 +68,11 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="flex-2/5 bg-blue-600">
-          <div className="mt-12">
-            <Link
-              href={"/auth"}
-              className="border-1 text-white m-10 rounded-lg px-6 py-2 "
-            >
-              Log In
-            </Link>
-            <Link
-              href={"/auth"}
-              className="border-1 text-blue-600 m-10 rounded-lg px-6 py-2 bg-amber-300"
-            >
-              Register
-            </Link>
-          </div>
-        </div>
-        <div className=" h-2/3 w-3xl absolute z-20 top-1/4 left-2/5 rounded-2xl">
-          <Image src={"/girl.png"} alt="" fill className="rounded-2xl" />
-        </div>
+        <div className="flex-2/5 bg-blue-600"></div>
+      </section>
+      <div className=" max-lg:hidden h-2/3 w-3xl absolute z-20 top-1/4 left-2/5 rounded-2xl">
+        <Image src={"/girl.png"} alt="" fill className="rounded-2xl" />
       </div>
-
       <div className="w-full h-3/4 bg-white">
         <p className="font-bold pt-25 text-center">
           <span className="text-amber-300">*</span> Course Categories
@@ -94,7 +94,7 @@ export default function Home() {
         <p className="text-white pr-10 text-4xl">2M+</p>
       </div>
       <div className="w-full h-2/3 flex justify-center">
-        <div className=" relative w-150 h-150 ml-10 mt-25 mb-25">
+        <div className=" relative md:w-xl w-150 h-150 ml-10 mt-25 mb-25">
           <Image src={"/girl.png"} alt="" fill className="rounded-lg" />
         </div>
         <div className="flex justify-center items-center">
@@ -145,6 +145,6 @@ export default function Home() {
         <p>Course Code: CSC320</p>
         <p>Course Title: Software Laboratory</p>
       </footer>
-    </div>
+    </main>
   );
 }
