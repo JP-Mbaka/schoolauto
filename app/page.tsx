@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <section className="flex w-full h-screen justify-between">
+      <section className="flex flex-row w-full h-screen">
         <nav className="flex absolute">
           <ul className="flex space-x-6 font-bold p-5 m-10">
             <li className="hover:text-amber-300 cursor-pointer active:text-blue-600">
@@ -24,60 +24,64 @@ export default function Home() {
               Contact Us
             </li>
           </ul>
-          <div className="mt-12">
-            <Link
-              href={"/auth"}
-              className="border-1 text-white m-10 rounded-lg px-6 py-2 "
-            >
-              Log In
-            </Link>
-            <Link
-              href={"/auth"}
-              className="border-1 text-blue-600 m-10 rounded-lg px-6 py-2 bg-amber-300"
-            >
-              Register
-            </Link>
-          </div>
         </nav>
         <div className="flex-3/5 bg-pink-50 bg-opacity-35">
-          <div className="font-bold pt-25 left-1/6 relative">
+          <div className="font-bold pt-80 left-32 relative">
             {" "}
             <span className="text-amber-300">*</span> 30 Days free trial
           </div>
-          <p className="font-bold text-blue-600 left-1/6 relative text-7xl">
+          <p className=" font-bold text-blue-600 left-32 relative lg:text-7xl md:text-5xl">
             Build Your Skills
           </p>
-          <p className="font-bold text-blue-600 left-1/6 relative text-7xl p-2">
+          <p className="font-bold text-blue-600 left-30 relative lg:text-7xl p-2 md:text-5xl">
             on the{" "}
             <span className="bg-amber-300 rounded-lg px-4 text-white">
               Best
             </span>
           </p>
-          <p className="font-bold text-blue-600 left-1/6 relative text-7xl">
+          <p className="font-bold text-blue-600 left-32 relative lg:text-7xl md:text-5xl">
             Platform
           </p>
-          <p className="font-bold left-1/6 relative">
-            Find Unlimited Courses That Matches Your Niche to Hasten the
+          <p className="font-bold left-32 relative">
+            Find Unlimited Courses That Matches Your Niche to
           </p>
-          <p className="font-bold left-1/6 relative">
-            Process Of Developing Your Skills
+          <p className="font-bold left-32 relative">
+            Hasten the Process Of Developing Your Skills
           </p>
-          <div className="flex left-1/6 relative mt-8">
-            <button className="border-0 text-white rounded-lg bg-blue-600 px-6 py-2">
+          <div className="flex left-32 relative mt-8">
+            <Link
+              href={"https://speed-pi-murex.vercel.app"}
+              className="border-0 text-white rounded-lg bg-blue-600 px-6 py-2 cursor-pointer"
+            >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
-        <div className="flex-2/5 bg-blue-600"></div>
+        <div className="flex-2/5 bg-blue-600">
+          <div className="mt-12">
+            <Link
+              href={"https://speed-pi-murex.vercel.app/login"}
+              className="border-1 text-white m-10 rounded-lg px-6 py-2  cursor-pointer"
+            >
+              Log In
+            </Link>
+            <Link
+              href={"https://speed-pi-murex.vercel.app/register"}
+              className="border-1 text-blue-600 m-10 rounded-lg px-6 py-2 bg-amber-300 cursor-pointer"
+            >
+              Register
+            </Link>
+          </div>
+        </div>
       </section>
-      <div className=" max-lg:hidden h-2/3 w-3xl absolute z-20 top-1/4 left-2/5 rounded-2xl">
+      <div className=" max-lg:hidden  w-3xl absolute z-20 top-1/4 left-2/5 rounded-2x max-md h-3/6">
         <Image src={"/girl.png"} alt="" fill className="rounded-2xl" />
       </div>
       <div className="w-full h-3/4 bg-white">
         <p className="font-bold pt-25 text-center">
           <span className="text-amber-300">*</span> Course Categories
         </p>
-        <p className="font-bold text-6xl text-center pt-4">
+        <p className="font-bold text-blue-600 lg:text-7xl md:text-5xl text-center pt-4">
           Explore our Course Categories
         </p>
         <p className="font-bold text-center pt-4">
@@ -88,13 +92,13 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-blue-600 flex w-full justify-center py-10">
-        <p className="text-white pr-10 text-4xl">260k+</p>
-        <p className="text-white pr-10 text-4xl">24+</p>
-        <p className="text-white pr-10 text-4xl">550+</p>
-        <p className="text-white pr-10 text-4xl">2M+</p>
+        <p className="text-white pr-10 lg:text-5xl md:text-3xl">260k+</p>
+        <p className="text-white pr-10 lg:text-5xl md:text-3xl">24+</p>
+        <p className="text-white pr-10 lg:text-5xl md:text-3xl">550+</p>
+        <p className="text-white pr-10 lg:text-5xl md:text-3xl">2M+</p>
       </div>
       <div className="w-full h-2/3 flex justify-center">
-        <div className=" relative md:w-xl w-150 h-150 ml-10 mt-25 mb-25">
+        <div className=" relative w-xl max- h-96 mt-25 mb-25">
           <Image src={"/girl.png"} alt="" fill className="rounded-lg" />
         </div>
         <div className="flex justify-center items-center">
@@ -129,12 +133,16 @@ export default function Home() {
                 "Get Certificate",
                 "Accounting instructor",
               ].map((n, index) => (
-                <div key={index} className="flex gap-5 items-center">
+                <Link
+                  href={"https://speed-pi-murex.vercel.app/register"}
+                  key={index}
+                  className="flex gap-5 items-center cursor-pointer"
+                >
                   <div className="h-5 w-5 bg-blue-600 p-0.5 flex justify-center items-center rounded-full">
                     <div className="h-2 w-2 bg-amber-50 rounded-full"></div>
                   </div>
                   <span>{n}</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
