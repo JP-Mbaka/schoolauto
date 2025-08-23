@@ -61,6 +61,12 @@ export default function Home() {
           <div className="mt-12">
             <Link
               href={"https://speed-pi-murex.vercel.app/login"}
+              className="ml-12 invisible border-1 text-white m-10 rounded-lg px-6 py-2  cursor-pointer"
+            >
+              Log In
+            </Link>{" "}
+            <Link
+              href={"https://speed-pi-murex.vercel.app/login"}
               className="border-1 text-white m-10 rounded-lg px-6 py-2  cursor-pointer"
             >
               Log In
